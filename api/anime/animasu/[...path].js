@@ -1,15 +1,8 @@
-// api/anime/animasu/[...path].js
-//
-// Proxy Vercel Serverless Function.
-// Tugasnya: menerima request dari template LenzStream, meneruskannya ke API
-// asli (sankavollerei.web.id), lalu mengembalikan hasilnya — sehingga URL
-// API asli tidak pernah terlihat langsung oleh browser pengunjung.
+// api/[...path].js
+// Proxy Vercel Serverless Function untuk seluruh endpoint Sankavollerei
 
 const UPSTREAM_BASE = "https://www.sankavollerei.web.id/anime/animasu";
 
-// GANTI dengan domain-domain yang boleh memanggil proxy ini.
-// Tambahkan domain blogspot bawaan jika masih dipakai, mis:
-// "https://lenzstream.blogspot.com"
 const ALLOWED_ORIGINS = [
   "https://lenzstream.my.id",
   "https://www.lenzstream.my.id",
@@ -45,7 +38,9 @@ export default async function handler(req, res) {
   params.delete("path");
   const qs = params.toString();
 
-  const targetUrl = `${UPSTREAM_BASE}/${subPath}${qs ? `?${qs}` : ""}`;
+  // Jika diakses tanpa parameter tambahan, arahkan langsung ke /home atau sesuaikan
+  const targetPath = subPath ? `/${subPath}` : "/home";
+  const targetUrl = `${UPSTREAM_BASE}${targetPath}${qs ? `?${qs}` : ""}`;
 
   try {
     const upstreamRes = await fetch(targetUrl, {
