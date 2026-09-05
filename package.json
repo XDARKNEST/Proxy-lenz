@@ -1,0 +1,6 @@
+{
+  "name": "lenzstream-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proxy Vercel untuk menyembunyikan endpoint API anime asli LenzStream."
+}
