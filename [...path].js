@@ -13,6 +13,7 @@ const UPSTREAM_BASE = "https://www.sankavollerei.web.id/anime/animasu";
 const ALLOWED_ORIGINS = [
   "https://lenzstream.my.id",
   "https://www.lenzstream.my.id",
+  "https://lenznonton.blogspot.com",
 ];
 
 function setCors(req, res) {
